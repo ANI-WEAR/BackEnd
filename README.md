@@ -1,6 +1,4 @@
-# BackEnd
-
-# 🎈 ANI-WEAR
+# 🎈 ANI-WEAR BackEnd
 
 ## 화면 설계서
 
