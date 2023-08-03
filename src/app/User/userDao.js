@@ -1,3 +1,13 @@
+// userDao.js
+const users = [
+  { id: 1, username: 'user1', password: 'password1' },
+  { id: 2, username: 'user2', password: 'password2' },
+];
+
+exports.getUserByUsername = (username) => {
+  return users.find((user) => user.username === username);
+};
+
 // 모든 유저 조회
 async function selectUser(connection) {
   const selectUserListQuery = `
@@ -79,7 +89,6 @@ async function updateUserInfo(connection, id, nickname) {
   const updateUserRow = await connection.query(updateUserQuery, [nickname, id]);
   return updateUserRow[0];
 }
-
 
 module.exports = {
   selectUser,
