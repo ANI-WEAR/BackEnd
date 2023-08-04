@@ -110,3 +110,22 @@ exports.editUser = async function (id, nickname) {
         return errResponse(baseResponse.DB_ERROR);
     }
 }
+
+exports.findUserId = async function (email) {
+    try {
+        // 해당 이메일에 관한 유저가 있는지 확인
+        const emailRows = await userProvider.emailCheck(email);
+
+        if (emailRows.length == 0)
+            return errResponse(baseResponse.USER_USEREMAIL_NOT_EXIST);
+
+        let userId=emailRows[0].UserId;
+
+        return response(baseResponse.SUCCESS, {'userEmail': email, 'userId': userId});
+
+
+    } catch (err) {
+        logger.error(`App - createUser Service error\n: ${err.message}`);
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};
