@@ -113,6 +113,13 @@ exports.login = async function (req, res) {
 };
 
 /**
+    Ryula
+    2023.08.04
+ */
+/**
+ * Ryula
+ * 2023.08.04
+ *
  * API No. 4
  * API Name : 아이디 찾기 API
  * [GET] /users/auth/id/{userEmail}

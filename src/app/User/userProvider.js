@@ -31,6 +31,10 @@ exports.retrieveUser = async function (userId) {
   return userResult[0];
 };
 
+/**
+ Ryula
+ 2023.08.04
+ */
 exports.emailCheck = async function (email) {
   const connection = await pool.getConnection(async (conn) => conn);
   const emailCheckResult = await userDao.selectUserEmail(connection, email);

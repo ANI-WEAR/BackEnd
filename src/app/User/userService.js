@@ -111,6 +111,10 @@ exports.editUser = async function (id, nickname) {
     }
 }
 
+/**
+ Ryula
+ 2023.08.04
+ */
 exports.findUserId = async function (email) {
     try {
         // 해당 이메일에 관한 유저가 있는지 확인
