@@ -18,6 +18,10 @@ async function selectUser(connection) {
   return userRows;
 }
 
+/**
+ Ryula
+ 2023.08.04
+ */
 // 이메일로 회원 조회
 async function selectUserEmail(connection, email) {
   const selectUserEmailQuery = `
