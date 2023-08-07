@@ -133,3 +133,26 @@ exports.findUserId = async function (email) {
         return errResponse(baseResponse.DB_ERROR);
     }
 };
+
+/**
+ Sejun
+ 2023.08.07
+ */
+exports.findUserPw = async function (email) {
+    try {
+        // 해당 이메일에 관한 유저가 있는지 확인
+        const emailRows = await userProvider.emailCheck(email);
+
+        if (emailRows.length == 0)
+            return errResponse(baseResponse.USER_USEREMAIL_NOT_EXIST);
+
+        let userPw=emailRows[0].UserPw;
+
+        return response(baseResponse.SUCCESS, {'userEmail': email, 'userPw': userPw});
+
+
+    } catch (err) {
+        logger.error(`App - createUser Service error\n: ${err.message}`);
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};

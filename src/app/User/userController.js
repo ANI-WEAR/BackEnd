@@ -194,7 +194,33 @@ exports.patchUsers = async function (req, res) {
 
 
 
+/**
+Sejun
+ 2023.08.07
+ */
+/**
+ * Sejun
+ * 2023.08.07
+ *
+ * API No. 6
+ * API Name : 비밀번호 찾기API
+ * [GET] /users/auth/pw/{userId}
+ */
+exports.findUserPw = async function (req, res) {
 
+    /**
+     * Path Variable: userEmail
+     */
+    const userEmail = req.params.userEmail;
+
+    if (!userEmail) return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
+
+    const findUserPwResponse = await userService.findUserPw(userEmail);
+
+    console.log(findUserPwResponse);
+
+    return res.send(findUserPwResponse);
+};
 
 
 
