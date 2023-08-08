@@ -112,6 +112,34 @@ exports.login = async function (req, res) {
     return res.send(signInResponse);
 };
 
+/**
+    Ryula
+    2023.08.04
+ */
+/**
+ * Ryula
+ * 2023.08.04
+ *
+ * API No. 4
+ * API Name : 아이디 찾기 API
+ * [GET] /users/auth/id/{userEmail}
+ */
+exports.findUserId = async function (req, res) {
+
+    /**
+     * Path Variable: userEmail
+     */
+    const userEmail = req.params.userEmail;
+
+    if (!userEmail) return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
+
+    const findUserIdResponse = await userService.findUserId(userEmail);
+
+    console.log(findUserIdResponse);
+    
+    return res.send(findUserIdResponse);
+};
+
 
 /**
  * API No. 5
