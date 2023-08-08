@@ -8,23 +8,28 @@ async function selectUser(connection) {
   return userRows;
 }
 
+/**
+ Ryula
+ 2023.08.04
+ */
 // 이메일로 회원 조회
 async function selectUserEmail(connection, email) {
   const selectUserEmailQuery = `
-                SELECT email, nickname 
-                FROM UserInfo 
-                WHERE email = ?;
+                SELECT EMAIL, UserId 
+                FROM User_Personal
+                WHERE EMAIL = ?;
                 `;
   const [emailRows] = await connection.query(selectUserEmailQuery, email);
+
   return emailRows;
 }
 
 // userId 회원 조회
 async function selectUserId(connection, userId) {
   const selectUserIdQuery = `
-                 SELECT id, email, nickname 
-                 FROM UserInfo 
-                 WHERE id = ?;
+                 SELECT UserId, PASSWORD 
+                 FROM User_Personal 
+                 WHERE UserId = ?;
                  `;
   const [userRow] = await connection.query(selectUserIdQuery, userId);
   return userRow;
@@ -48,7 +53,7 @@ async function insertUserInfo(connection, insertUserInfoParams) {
 async function selectUserPassword(connection, selectUserPasswordParams) {
   const selectUserPasswordQuery = `
         SELECT email, nickname, password
-        FROM UserInfo 
+        FROM User_Personal 
         WHERE email = ? AND password = ?;`;
   const selectUserPasswordRow = await connection.query(
       selectUserPasswordQuery,

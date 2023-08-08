@@ -30,12 +30,32 @@ exports.retrieveUser = async function (userId) {
   return userResult[0];
 };
 
+/**
+ Ryula
+ 2023.08.04
+ */
 exports.emailCheck = async function (email) {
   const connection = await pool.getConnection(async (conn) => conn);
   const emailCheckResult = await userDao.selectUserEmail(connection, email);
+
+  console.log(`추가된 회원 : ${emailCheckResult}`);
   connection.release();
 
   return emailCheckResult;
+};
+
+/**
+ Sejun
+ 2023.08.07
+ */
+exports.idCheck = async function (id) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  const idCheckResult = await userDao.selectUserId(connection, id);
+
+  console.log(`추가된 회원 : ${idCheckResult}`);
+  connection.release();
+
+  return idCheckResult;
 };
 
 exports.passwordCheck = async function (selectUserPasswordParams) {

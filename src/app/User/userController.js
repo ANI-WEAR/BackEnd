@@ -89,7 +89,6 @@ exports.getUserById = async function (req, res) {
     return res.send(response(baseResponse.SUCCESS, userByUserId));
 };
 
-
 // TODO: After 로그인 인증 방법 (JWT)
 /**
  * API No. 4
@@ -140,9 +139,57 @@ exports.patchUsers = async function (req, res) {
     }
 };
 
+/**
+ * Ryula
+ * 2023.08.04
+ *
+ * API No. 6
+ * API Name : 아이디 찾기 API
+ * [GET] /users/auth/id/{userEmail}
+ */
+exports.findUserId = async function (req, res) {
 
+    /**
+     * Path Variable: userEmail
+     */
+    const userEmail = req.params.userEmail;
 
+    if (!userEmail) return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
 
+    const findUserIdResponse = await userService.findUserId(userEmail);
+
+    console.log(findUserIdResponse);
+
+    return res.send(findUserIdResponse);
+};
+
+/**
+Sejun
+ 2023.08.07
+ */
+/**
+ * Sejun
+ * 2023.08.07
+ *
+ * API No. 7
+ * API Name : 비밀번호 찾기API
+ * [GET] /users/auth/pw/{userId}
+ */
+exports.findUserPw = async function (req, res) {
+
+    /**
+     * Path Variable: userEmail
+     */
+    const userId = req.params.userId;
+
+    if (!userId) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
+
+    const findUserPwResponse = await userService.findUserPw(userId);
+
+    console.log(findUserPwResponse);
+
+    return res.send(findUserPwResponse);
+};
 
 
 
