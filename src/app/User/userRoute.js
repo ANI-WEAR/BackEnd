@@ -27,7 +27,7 @@ module.exports = function(app){
      2023.08.04
      */
     // 6. 비밀번호 찾기 API
-    app.get('/users/auth/pw/:userEmail', user.findUserPw);
+    app.get('/users/auth/pw/:userId', user.findUserPw);
 
 
     // TODO: After 로그인 인증 방법 (JWT)

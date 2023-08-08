@@ -211,11 +211,11 @@ exports.findUserPw = async function (req, res) {
     /**
      * Path Variable: userEmail
      */
-    const userEmail = req.params.userEmail;
+    const userId = req.params.userEmail;
 
-    if (!userEmail) return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
+    if (!userId) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
 
-    const findUserPwResponse = await userService.findUserPw(userEmail);
+    const findUserPwResponse = await userService.findUserPw(userId);
 
     console.log(findUserPwResponse);
 

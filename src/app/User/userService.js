@@ -138,17 +138,17 @@ exports.findUserId = async function (email) {
  Sejun
  2023.08.07
  */
-exports.findUserPw = async function (email) {
+exports.findUserPw = async function (id) {
     try {
         // 해당 이메일에 관한 유저가 있는지 확인
-        const emailRows = await userProvider.emailCheck(email);
+        const idRows = await userProvider.idCheck(id);
 
-        if (emailRows.length == 0)
-            return errResponse(baseResponse.USER_USEREMAIL_NOT_EXIST);
+        if (idRows.length == 0)
+            return errResponse(baseResponse.USER_USERID_NOT_EXIST);
 
-        let userPw=emailRows[0].UserPw;
+        let userPw=idRows[0].UserPw;
 
-        return response(baseResponse.SUCCESS, {'userEmail': email, 'userPw': userPw});
+        return response(baseResponse.SUCCESS, {'userId': id, 'userPw': userPw});
 
 
     } catch (err) {
