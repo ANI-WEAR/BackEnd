@@ -1,14 +1,21 @@
-# 🎈 AniWear
+# AniWear
 비건 쇼핑몰
 
-## 🎁 Figma  
+## Team Member
+- 김률아(Inha Univ.)
+- 박세준(CHUNG-ANG Univ.)
+- 한채연(Catholic Univ.)
+
+## Project Goal
+
+## Figma  
 - 
 
-## 🎇 ERD
+## ERD
 - 
 ---
 
-## 🍉 규칙
+## 규칙
 - branch명 규칙  
 ```
 feature/signup : 새로운 기능 추가할 때(기능별 1개씩만 signup1, signup2 => x)  
