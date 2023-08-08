@@ -91,7 +91,10 @@ exports.getUserById = async function (req, res) {
 
 // TODO: After 로그인 인증 방법 (JWT)
 /**
+ * chaeyeon
+ * 2023.08.07
  * API No. 4
+ *
  * API Name : 로그인 API
  * [POST] /users/auth/login
  * body : userId, passsword
@@ -163,10 +166,6 @@ exports.findUserId = async function (req, res) {
     return res.send(findUserIdResponse);
 };
 
-/**
-Sejun
- 2023.08.07
- */
 /**
  * Sejun
  * 2023.08.07
