@@ -1,3 +1,4 @@
+const user = require("./userController");
 module.exports = function(app){
     const user = require('./userController');
     const jwtMiddleware = require('../../../config/jwtMiddleware');
@@ -20,6 +21,13 @@ module.exports = function(app){
      */
     // 4. 아이디 찾기 API
     app.get('/users/auth/id/:userEmail', user.findUserId);
+
+    /**
+     Sejun
+     2023.08.04
+     */
+    // 6. 비밀번호 찾기 API
+    app.get('/users/auth/pw/:userId', user.findUserPw);
 
 
     // TODO: After 로그인 인증 방법 (JWT)

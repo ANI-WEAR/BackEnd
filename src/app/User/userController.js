@@ -99,17 +99,42 @@ exports.getUserById = async function (req, res) {
  * API No. 4
  * API Name : 로그인 API
  * [POST] /app/login
- * body : email, passsword
+ * body : userId, passsword
  */
 exports.login = async function (req, res) {
 
-    const {email, password} = req.body;
+    const {userId, password} = req.body;
 
     // TODO: email, password 형식적 Validation
+    // 여기에서 사용자 정보 검증과 인증 로직을 수행하고 토큰을 생성하는 작업을 진행합니다.
 
-    const signInResponse = await userService.postSignIn(email, password);
+    // 하드코딩된 사용자 정보
+    const users = [
+        { id: 1, userId: 'john', password: 'secret123' },
+        { id: 2, userId: 'jane', password: 'mypassword' },
+    ];
 
-    return res.send(signInResponse);
+    // 입력된 사용자 정보와 일치하는 사용자 찾기
+    const user = users.find((user) => user.userId === userId && user.password === password);
+
+    if (user) {
+        // 로그인 성공
+        return res.status(200).json({ message: '로그인 성공', user });
+    } else {
+        // 로그인 실패
+        return res.status(401).json({ message: '로그인 실패', user: null });
+    }
+    
+    // try {
+    //   const token = loginService.authenticateUser(username, password); // JWT 토큰 생성
+    //   res.status(200).json({ token });
+    // } catch (err) {
+    //   res.status(400).json({ error : "You are unauthorized to make this request. please sing up." });
+    // }
+
+    // const signInResponse = await userService.postSignIn(userId, password);
+
+    // return res.send(signInResponse);
 };
 
 /**
@@ -169,7 +194,33 @@ exports.patchUsers = async function (req, res) {
 
 
 
+/**
+Sejun
+ 2023.08.07
+ */
+/**
+ * Sejun
+ * 2023.08.07
+ *
+ * API No. 6
+ * API Name : 비밀번호 찾기API
+ * [GET] /users/auth/pw/{userId}
+ */
+exports.findUserPw = async function (req, res) {
 
+    /**
+     * Path Variable: userEmail
+     */
+    const userId = req.params.userId;
+
+    if (!userId) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
+
+    const findUserPwResponse = await userService.findUserPw(userId);
+
+    console.log(findUserPwResponse);
+
+    return res.send(findUserPwResponse);
+};
 
 
 

@@ -45,6 +45,20 @@ exports.emailCheck = async function (email) {
   return emailCheckResult;
 };
 
+/**
+ Sejun
+ 2023.08.07
+ */
+exports.idCheck = async function (id) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  const idCheckResult = await userDao.selectUserId(connection, id);
+
+  console.log(`추가된 회원 : ${idCheckResult}`);
+  connection.release();
+
+  return idCheckResult;
+};
+
 exports.passwordCheck = async function (selectUserPasswordParams) {
   const connection = await pool.getConnection(async (conn) => conn);
   const passwordCheckResult = await userDao.selectUserPassword(
