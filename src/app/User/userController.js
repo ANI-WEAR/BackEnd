@@ -19,14 +19,14 @@ const {emit} = require("nodemon");
 /**
  * API No. 1
  * API Name : 유저 생성 (회원가입) API
- * [POST] /app/users
+ * [POST] /users/auth/signUp
  */
 exports.postUsers = async function (req, res) {
 
     /**
-     * Body: email, password, nickname
+     * Body: userId, password, userName, userPhoneNum, userAddress, userGroup
      */
-    const {email, password, nickname} = req.body;
+    const {userId, password, userName, userPhoneNum, userAddress, userGroup} = req.body;
 
     // 빈 값 체크
     if (!email)
@@ -43,11 +43,7 @@ exports.postUsers = async function (req, res) {
     // 기타 등등 - 추가하기
 
 
-    const signUpResponse = await userService.createUser(
-        email,
-        password,
-        nickname
-    );
+    const signUpResponse = await userService.createUser(userId, password, userName, userPhoneNum, userAddress, userGroup);
 
     return res.send(signUpResponse);
 };
@@ -78,7 +74,7 @@ exports.getUsers = async function (req, res) {
 /**
  * API No. 3
  * API Name : 특정 유저 조회 API
- * [GET] /app/users/{userId}
+ * [GET] /users/{userId}
  */
 exports.getUserById = async function (req, res) {
 
@@ -98,50 +94,30 @@ exports.getUserById = async function (req, res) {
 /**
  * API No. 4
  * API Name : 로그인 API
- * [POST] /app/login
+ * [POST] /users/auth/login
  * body : userId, passsword
  */
 exports.login = async function (req, res) {
 
     const {userId, password} = req.body;
 
-    // TODO: email, password 형식적 Validation
-    // 여기에서 사용자 정보 검증과 인증 로직을 수행하고 토큰을 생성하는 작업을 진행합니다.
+    // TODO: userId, password 형식적 Validation
+    try {
+        const token = await userService.login(userId, password);
+        res.json({ success: true, token });
+      } catch (error) {
+        res.status(400).json({ success: false, message: '로그인 실패' });
+      }
 
-    // 하드코딩된 사용자 정보
-    const users = [
-        { id: 1, userId: 'john', password: 'secret123' },
-        { id: 2, userId: 'jane', password: 'mypassword' },
-    ];
+    const signInResponse = await userService.postSignIn(userId, password);
 
-    // 입력된 사용자 정보와 일치하는 사용자 찾기
-    const user = users.find((user) => user.userId === userId && user.password === password);
-
-    if (user) {
-        // 로그인 성공
-        return res.status(200).json({ message: '로그인 성공', user });
-    } else {
-        // 로그인 실패
-        return res.status(401).json({ message: '로그인 실패', user: null });
-    }
-    
-    // try {
-    //   const token = loginService.authenticateUser(username, password); // JWT 토큰 생성
-    //   res.status(200).json({ token });
-    // } catch (err) {
-    //   res.status(400).json({ error : "You are unauthorized to make this request. please sing up." });
-    // }
-
-    // const signInResponse = await userService.postSignIn(userId, password);
-
-    // return res.send(signInResponse);
+    return res.send(signInResponse);
 };
-
 
 /**
  * API No. 5
  * API Name : 회원 정보 수정 API + JWT + Validation
- * [PATCH] /app/users/:userId
+ * [PATCH] /users/{userId}
  * path variable : userId
  * body : nickname
  */
