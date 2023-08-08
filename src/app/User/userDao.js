@@ -1,3 +1,13 @@
+// userDao.js
+const users = [
+  { id: 1, username: 'user1', password: 'password1' },
+  { id: 2, username: 'user2', password: 'password2' },
+];
+
+exports.getUserByUsername = (username) => {
+  return users.find((user) => user.username === username);
+};
+
 // 모든 유저 조회
 async function selectUser(connection) {
   const selectUserListQuery = `
@@ -38,13 +48,13 @@ async function selectUserId(connection, userId) {
 // 유저 생성
 async function insertUserInfo(connection, insertUserInfoParams) {
   const insertUserInfoQuery = `
-        INSERT INTO User_Personal(userId, password, email, userName, userPhoneNum, userAddress, userGroup)
-        VALUES (?, ?, ?, ?, ?, ?, ?);
+        INSERT INTO UserInfo(email, password, nickname)
+        VALUES (?, ?, ?);
     `;
-    const insertUserInfoRow = await connection.query(
-      insertUserInfoQuery,
-      insertUserInfoParams
-    );
+  const insertUserInfoRow = await connection.query(
+    insertUserInfoQuery,
+    insertUserInfoParams
+  );
 
   return insertUserInfoRow;
 }
