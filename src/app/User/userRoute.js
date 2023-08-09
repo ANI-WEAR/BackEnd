@@ -20,7 +20,7 @@ module.exports = function(app){
         2023.08.04
      */
     // 4. 아이디 찾기 API
-    app.get('/users/auth/id/:userEmail', user.findUserId);
+    app.get('/users/auth/id/:user_email', user.findUserId);
 
     /**
      Sejun

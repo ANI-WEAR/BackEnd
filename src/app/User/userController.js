@@ -152,7 +152,7 @@ exports.login = async function (req, res) {
 exports.findUserId = async function (req, res) {
 
     /**
-     * Path Variable: userEmail
+     * Path Variable: user_email
      */
     const userEmail = req.params.userEmail;
 

@@ -123,9 +123,9 @@ exports.findUserId = async function (email) {
         if (emailRows.length == 0)
             return errResponse(baseResponse.USER_USEREMAIL_NOT_EXIST);
 
-        let userId=emailRows[0].UserId;
+        let user_id=emailRows[0].user_id;
 
-        return response(baseResponse.SUCCESS, {'userEmail': email, 'userId': userId});
+        return response(baseResponse.SUCCESS, {'user_email': email, 'user_id': user_id});
 
 
     } catch (err) {
