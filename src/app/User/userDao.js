@@ -34,14 +34,14 @@ async function selectUserEmail(connection, email) {
   return emailRows;
 }
 
-// userId 회원 조회
-async function selectUserId(connection, userId) {
+// user_id 회원 조회
+async function selectUserId(connection, user_id) {
   const selectUserIdQuery = `
-                 SELECT UserId, PASSWORD 
+                 SELECT user_id, user_password 
                  FROM User_Personal 
-                 WHERE UserId = ?;
+                 WHERE user_id = ?;
                  `;
-  const [userRow] = await connection.query(selectUserIdQuery, userId);
+  const [userRow] = await connection.query(selectUserIdQuery, user_id);
   return userRow;
 }
 

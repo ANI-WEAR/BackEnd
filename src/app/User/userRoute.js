@@ -13,7 +13,7 @@ module.exports = function(app){
     app.get('/app/users',user.getUsers); 
 
     // 3. 특정 유저 조회 API
-    app.get('/app/users/:userId', user.getUserById);
+    app.get('/app/users/:user_id', user.getUserById);
 
     /**
         Ryula
@@ -27,7 +27,7 @@ module.exports = function(app){
      2023.08.04
      */
     // 6. 비밀번호 찾기 API
-    app.get('/users/auth/pw/:userId', user.findUserPw);
+    app.get('/users/auth/pw/:user_id', user.findUserPw);
 
 
     // TODO: After 로그인 인증 방법 (JWT)
@@ -35,7 +35,7 @@ module.exports = function(app){
     app.post('/app/login', user.login);
 
     // 회원 정보 수정 API (JWT 검증 및 Validation - 메소드 체이닝 방식으로 jwtMiddleware 사용)
-    app.patch('/app/users/:userId', jwtMiddleware, user.patchUsers)
+    app.patch('/app/users/:user_id', jwtMiddleware, user.patchUsers)
 
 
 

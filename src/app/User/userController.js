@@ -211,7 +211,7 @@ exports.findUserPw = async function (req, res) {
     /**
      * Path Variable: userEmail
      */
-    const userId = req.params.userId;
+    const userId = req.params.user_id;
 
     if (!userId) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
 
