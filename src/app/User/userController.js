@@ -154,7 +154,7 @@ exports.findUserId = async function (req, res) {
     /**
      * Path Variable: user_email
      */
-    const userEmail = req.params.userEmail;
+    const userEmail = req.params.user_email;
 
     if (!userEmail) return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
 
