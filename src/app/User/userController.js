@@ -203,7 +203,7 @@ Sejun
  * 2023.08.07
  *
  * API No. 6
- * API Name : 비밀번호 찾기API
+ * API Name : 비밀번호 찾기 API
  * [GET] /users/auth/pw/{userId}
  */
 exports.findUserPw = async function (req, res) {

@@ -146,7 +146,7 @@ exports.findUserPw = async function (id) {
         if (idRows.length == 0)
             return errResponse(baseResponse.USER_USERID_NOT_EXIST);
 
-        let userPw=idRows[0].UserPw;
+        let userPw=idRows[0].PASSWORD;
 
         return response(baseResponse.SUCCESS, {'userId': id, 'userPw': userPw});
 
