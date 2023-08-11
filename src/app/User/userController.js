@@ -30,15 +30,15 @@ exports.postUsers = async function (req, res) {
 
     // 빈 값 체크
     if (!email)
-        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+        return res.send(errResponse(baseResponse.SIGNUP_EMAIL_EMPTY));
 
     // 길이 체크
     if (email.length > 30)
-        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+        return res.send(errResponse(baseResponse.SIGNUP_EMAIL_LENGTH));
 
     // 형식 체크 (by 정규표현식)
     if (!regexEmail.test(email))
-        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+        return res.send(errResponse(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
 
     // 기타 등등 - 추가하기
 
@@ -106,7 +106,7 @@ exports.login = async function (req, res) {
     const {userId, password} = req.body;
 
     // TODO: email, password 형식적 Validation
-    // 여기에서 사용자 정보 검증과 인증 로직을 수행하고 토큰을 생성하는 작업을 진행합니다.
+    /*// 여기에서 사용자 정보 검증과 인증 로직을 수행하고 토큰을 생성하는 작업을 진행합니다.
 
     // 하드코딩된 사용자 정보
     const users = [
@@ -130,11 +130,11 @@ exports.login = async function (req, res) {
     //   res.status(200).json({ token });
     // } catch (err) {
     //   res.status(400).json({ error : "You are unauthorized to make this request. please sing up." });
-    // }
+    // }*/
 
-    // const signInResponse = await userService.postSignIn(userId, password);
+    const signInResponse = await userService.postSignIn(userId, password);
 
-    // return res.send(signInResponse);
+    return res.send(signInResponse);
 };
 
 /**
