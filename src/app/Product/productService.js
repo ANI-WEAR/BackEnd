@@ -23,7 +23,9 @@ exports.selectProd = async function () {
         let result={};
 
         for(let i=0;i<len;i++){
-            result[i]={'product_name': prodResult[i].product_name, 'product_price': prodResult[i].product_price, 'hash_tag': prodResult[i].hash_tag};
+            result[i]={'prod_id':prodResult[i].product_id, 'name': prodResult[i].product_name, 'price': prodResult[i].product_price, 'sex': prodResult[i].product_sex};
+            const prodImg=await prodProvider.selectImg(prodResult[i].product_id);
+            result[i]['img']=prodImg;
         }
 
         return response(baseResponse.SUCCESS, result);
@@ -50,8 +52,10 @@ exports.selectProdPage = async function (prod_id) {
             return errResponse(baseResponse.PRODUCT_ID_WRONG);
         }
 
-        const result={'prod_id':prodResult[0].product_id, 'name': prodResult[0].product_name};
-        //console.log(result);
+        const result={'prod_id':prodResult[0].product_id, 'name': prodResult[0].product_name, 'price': prodResult[0].product_price, 'sex': prodResult[0].product_sex};
+        const prodImg=await prodProvider.selectImg(prodResult[0].product_id);
+        result['img']=prodImg;
+        //console.log(prodImg);
 
         return response(baseResponse.SUCCESS, result);
     } catch (err) {
