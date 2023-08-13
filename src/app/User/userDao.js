@@ -1,12 +1,3 @@
-// userDao.js
-const users = [
-  { id: 1, username: 'user1', password: 'password1' },
-  { id: 2, username: 'user2', password: 'password2' },
-];
-
-exports.getUserByUsername = (username) => {
-  return users.find((user) => user.username === username);
-};
 
 // 모든 유저 조회
 async function selectUser(connection) {
@@ -41,7 +32,7 @@ async function selectUserId(connection, user_id) {
                  FROM User_Personal 
                  WHERE user_id = ?;
                  `;
-  const [userRow] = await connection.query(selectUserIdQuery, user_id);
+  const [userRow] = await connection.query(selectUserIdQuery, [user_id]);
   return userRow;
 }
 
@@ -62,9 +53,10 @@ async function insertUserInfo(connection, insertUserInfoParams) {
 // 패스워드 체크
 async function selectUserPassword(connection, selectUserPasswordParams) {
   const selectUserPasswordQuery = `
-        SELECT email, nickname, password
+        SELECT user_id, user_name, user_password
         FROM User_Personal 
-        WHERE email = ? AND password = ?;`;
+        WHERE user_id = ? AND user_password = ?;
+    `;
   const selectUserPasswordRow = await connection.query(
       selectUserPasswordQuery,
       selectUserPasswordParams
@@ -74,14 +66,14 @@ async function selectUserPassword(connection, selectUserPasswordParams) {
 }
 
 // 유저 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
-async function selectUserAccount(connection, email) {
+async function selectUserAccount(connection, user_id) {
   const selectUserAccountQuery = `
-        SELECT status, id
-        FROM UserInfo 
-        WHERE email = ?;`;
+        SELECT status, user_id
+        FROM User_Personal
+        WHERE user_id = ?;`;
   const selectUserAccountRow = await connection.query(
       selectUserAccountQuery,
-      email
+      [user_id]
   );
   return selectUserAccountRow[0];
 }
