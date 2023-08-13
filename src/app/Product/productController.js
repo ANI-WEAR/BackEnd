@@ -14,6 +14,18 @@ exports.getProdList = async function (req, res) {
     return res.send(prodListResult);
 };
 
+/**
+ Ryula
+ 2023.08.13
+ */
+exports.getProdPage = async function (req, res) {
+    // 상품 전체 조회
+    const prodId=req.params.prod_id;
+    const prodPageResult = await prodService.selectProdPage(prodId);
+
+    return res.send(prodPageResult);
+};
+
 exports.postUsers = async function (req, res) {
 
 };

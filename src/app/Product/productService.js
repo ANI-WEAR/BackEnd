@@ -6,7 +6,10 @@ const baseResponse = require("../../../config/baseResponseStatus");
 const {response} = require("../../../config/response");
 const {errResponse} = require("../../../config/response");
 
-
+/**
+ Ryula
+ 2023.08.11
+ */
 exports.selectProd = async function () {
     try{
         const connection = await pool.getConnection(async (conn) => conn);
@@ -26,6 +29,33 @@ exports.selectProd = async function () {
         return response(baseResponse.SUCCESS, result);
     } catch (err) {
         logger.error(`App - selectProd Service error\n: ${err.message}`);
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}
+
+/**
+ Ryula
+ 2023.08.13
+ */
+exports.selectProdPage = async function (prod_id) {
+    try{
+        const connection = await pool.getConnection(async (conn) => conn);
+
+        const prodResult = await prodDao.selectProdPage(connection, prod_id);
+        //console.log(`추가된 회원 : ${prodResult}`);
+
+        connection.release();
+
+        if(prodResult.length!=1){
+            return errResponse(baseResponse.PRODUCT_ID_WRONG);
+        }
+
+        const result={'prod_id':prodResult[0].product_id, 'name': prodResult[0].product_name};
+        //console.log(result);
+
+        return response(baseResponse.SUCCESS, result);
+    } catch (err) {
+        logger.error(`App - selectProdPage Service error\n: ${err.message}`);
         return errResponse(baseResponse.DB_ERROR);
     }
 }
